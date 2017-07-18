@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+#define BUFLEN 1024
+#define NUMOP 2
+
+//演算子を表す構造体
+
+typedef struct Operation{
+  const char *name; //演算子の名前
+  int (*func)(int i, int n); //実際の演算を行う関数へのポインタ  
+
+} Opeartion;
+
+int add(int m, int n){
+  return m*n;  
+}
+
+int minus(int m, int n){
+
+  return m - n;
+}

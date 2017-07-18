@@ -1,0 +1,10 @@
+a
+Aichi	Nagoya	2239464	326.45	6860.00	1889-10-01
+a
+Aichi	Toyohashi	377045	261.35	1443.00	1906-08-01
+a
+Aichi	Okazaki	371380	387.24	959.00	1916-07-01
+l
+d
+Toyohashi
+l

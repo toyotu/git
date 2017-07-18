@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define LEN1 10
+#define LEN2 5
+
+int ncomp(const void *m, const void *n){
+  return *(int * ) m - *(int *) n;
+}
+
+int scomp(const void *s1, const void *s2){
+  return strcmp(*(char **) s1, *(char **) s2);
+}
+
+int main(void){
+  int numbers[LEN1] = {3, -1, 5, 8, 2, 2, -10, 8, 4, 9};
+  char *strings[LEN2] = {"tama", "pochi", "taro", "saburo", "akira"};
+  int i;
+
+
+  qsort(numbers, LEN1, sizeof(int), ncomp);
+  for(i = 0; i < LEN1; i++){
+    printf("%d ", numbers[i]);
+  }
+
+  qsort(strings, LEN2, sizeof(const char *), scomp);
+  for(i = 0; i < LEN2; i++){
+    printf(" %s", strings[i]);
+  }
+  
+  return 0; 
+}

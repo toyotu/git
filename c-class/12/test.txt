@@ -1,0 +1,10 @@
+a
+Kumamoto  Arao  55505 57.15 971.00  1942-04-01
+a
+Kochi Kami  29144 538.22  54.10 2006-03-01
+a
+Kumamoto  Tamana  70747 152.55  464.00  1954-04-01
+l
+d
+Tamana
+l

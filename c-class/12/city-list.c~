@@ -1,0 +1,88 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+#define STRLEN 32
+#define BUF_LEN 128
+#define CITYDB_R_FILE "cities.txt"
+#define CITYDB_W_FILE "citiesDB.txt"
+
+struct cities {
+  char pref[STRLEN];
+  char city[STRLEN];
+  int popl;
+  float ares;
+  float dens;
+  char founded[STRLEN];
+  struct cities *next;
+};
+
+struct cites *root = NULL;
+
+void *mymalloc(size_t sz){
+  void *p (void *)malloc(sz);
+  if(p == NULL){
+    fprintf(stderr, "ERROR: Can't malloc memory %d bytes." (int)sz);
+    exit(1);
+  }
+  memset(p, 0, sz);  
+  return p; 
+}
+
+void showCity(struct cities *c, FILE *p){
+  fprintf(fp, "%s\t%s\t%.2f\t%s\n",
+	  c->pref, c->city, c->popl, c->area, c->dens, c->founded);
+}
+
+struct cities *genNewCityCell(char *pref, char *city, int popl, float area, float dens, char *founded){
+  c = mymalloc(sizeof(struct cities));
+  //よう加筆
+
+  return c;
+}
+
+void showList(FILE *p){
+  struct cities *cur = root;
+  while(cur != NULL){
+    showCity(cur, fp);
+    cur = cur->next;
+  }
+}
+
+void saveList(){
+
+  //よう加筆
+}
+
+struct cites *line2City(char *buf){
+  struct cities *c = NULL; 
+  int popl;
+  char pref[STRLEN], city[STRLEN], fouded[STRLEN];
+  float area, dens;
+  sscanf(buf, "%s %s %d %f %f %s", pref, city, &popl, &area, &dens, founded);
+  c = getNewCityCell(pref, city, popl, area, dens, founded);
+  return c;
+}
+
+void addNewCity(){
+  char buf[BUF_LEN] = "";
+  struct cities *c;  
+
+  while(strlen(buf) <= 0 ){
+    printf("Input ont line \n");
+    inputStr(buf, BUF_LEN);
+  }
+  if(strcmp(buf, "Prefeacture", 10) == 0)return;
+
+  c = line2City(buf);
+  addCity(c);
+}
+
+void inputStr(char *buf, int len){
+  if (fgets(buf, len, stdin ) != NULL){
+    buf[strlen(buf)-1] = '\0';    
+  }else{
+    exit(1);
+  }
+}
