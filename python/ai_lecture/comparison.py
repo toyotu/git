@@ -6,8 +6,3 @@ import sys, os, math
 # import ROOT
 # import pyfits as pf
 
-a = True
-b = False
-
-print a
-print b
