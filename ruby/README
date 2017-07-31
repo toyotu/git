@@ -1,0 +1,9 @@
+Mecabを使いやすくするプログラム
+USAGE:
+Mecab.new("加熱したら燃える")
+Mecab.new("加熱したら燃える").result -> mecabの出力の1行ごとの解析結果(M_line)の配列
+Mecab.new("加熱したら燃える").show -> 解析結果の表示
+Mecab.new("加熱したら燃える").n_merge -> 名詞＋するをくっつける
+Mecab.new("加熱したら燃える").select("動詞") -> 品詞が該当するもののみ選ぶ
+Mecab.new("加熱したら燃える").normal -> 標準形の配列
+Mecab.new("加熱したら燃える").surface -> 表層形の配列

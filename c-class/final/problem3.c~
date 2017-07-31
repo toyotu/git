@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+#define STRSIZE 1024
+#define BUFSIZE 1024
+#define DATSIZE 1024
+
+struct rain{
+  char *city;
+  float Jan,Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec;
+};
+
+int data_size = 0;
+struct rain rda[DATSIZE];
+
+int main(int argc, char *argv[]){
+
+  int i = 0;
+  if(argc != 3){
+    fprintf(stderr, "Usage: %s [option] [month]", argv[0]);
+    exit(-1);
+  }
+  //一宮	57.5	81.5	113	190	143	212	146.5	119.5	366.5	142.5	84.5	77.5
+  while (fscanf(stdin, "%s\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\n", rda[i].city, &(rda[i].Jan), &(rda[i].Feb), &(rda[i].Mar), &(rda[i].Apr), &(rda[i].May), &(rda[i].Jun),  &(rda[i].Jul), &(rda[i].Aug), &(rda[i].Sep), &(rda[i].Oct), &(rda[i].Nov), &(rda[i].Dec)) != EOF){
+        i++;
+  }
+
+  /* printf("%s", rda[0].city); */
+  
+  return 0;
+}
