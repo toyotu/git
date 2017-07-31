@@ -105,6 +105,3 @@ class Mecab
     return @result.collect{|line| line.show}.join("\n")
   end
 end
-
-
-print Mecab.new("加熱したら燃える").select("動詞").normal
