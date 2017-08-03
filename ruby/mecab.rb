@@ -44,7 +44,7 @@ class M_line
     self.yomi = self.yomi + lat_m_line.yomi
     return self
   end
-  
+
 end
 
 
@@ -85,7 +85,7 @@ class Mecab
     arr = []
     count = 0
     d_flag = 0 #mergeした時点で立てて、次のやつを捨てる
-    arr = @result.each_cons(2).to_a.collect do |former, latter|
+    arr = @result.each_cons(2).to_a.collect{|former, latter|
       if d_flag == 1
         d_flag = 0
         nil #前でmergeしたらnilにする
@@ -96,11 +96,44 @@ class Mecab
       else
         former
       end
+    }
+
+    if d_flag == 1
+      @result = arr.compact
+    else
+      @result = arr.compact << @result[-1]
     end
-    @result = arr.compact << @result[-1]
+    
     return self 
   end
+  
+  #しやすい、にくいをまとめる  
+  def adj_merge
+    del_nums = []
+    arr = []
+    count = 0
+    d_flag = 0 #mergeした時点で立てて、次のやつを捨てる
+    arr = @result.each_cons(2).to_a.collect do |former, latter|
+      if d_flag == 1
+        d_flag = 0
+        nil #前でmergeしたらnilにする
+      elsif former.pos == "動詞" && latter.pos == "形容詞" && latter.pos2 == "非自立"
+        d_flag = 1
+        del_nums << count
+        former.merge(latter)
+      else
+        former
+      end
+    end
 
+    if d_flag == 1
+      @result = arr.compact
+    else
+      @result = arr.compact << @result[-1]
+    end
+    return self 
+  end
+  
   def show
     return @result.collect{|line| line.show}.join("\n")
   end
