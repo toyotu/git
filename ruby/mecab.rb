@@ -45,6 +45,21 @@ class M_line
     return self
   end
 
+  #3つのlineを一つにまとめる（名詞＋する）
+  def merge3(mid_line, lat_line)
+    self.surf = self.surf + mid_line.surf + lat_line.surf
+    self.pos = lat_line.pos
+    self.pos2 = lat_line.pos2
+    self.pos3 = lat_line.pos3
+    self.pos4 = lat_line.pos4
+    self.pos5 = lat_line.pos5
+    self.pos6 = self.pos6 + mid_line.pos6 + lat_line.pos6
+    self.normal = self.normal + mid_line.normal + lat_line.normal
+    self.yomi = self.yomi + mid_line.yomi + lat_line.yomi
+    return self
+  end
+
+  
 end
 
 
@@ -133,8 +148,32 @@ class Mecab
     end
     return self 
   end
+
+  # "常温・常圧"をまとめる
+  def merge3
+    del_nums = []
+    arr = []
+    count = 0
+    d_flag = 0 #mergeした時点で立てて、次のやつを捨てる
+    arr = @result.each_cons(3).to_a.collect do |former, middle, latter|
+      if d_flag > 0
+        d_flag -= 1
+        nil #前でmergeしたらnilにする
+      elsif former.surf == "常温" && middle.surf == "・" && latter.surf == "常圧"
+        d_flag = 2
+        del_nums << count
+        former.merge3(middle, latter)
+      else
+        former
+      end
+    end
+    @result = arr.compact + [@result[-2], @result[-1]]
+    return self
+  end
+
   
   def show
     return @result.collect{|line| line.show}.join("\n")
   end
 end
+
