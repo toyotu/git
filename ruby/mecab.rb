@@ -170,10 +170,17 @@ class Mecab
     @result = arr.compact + [@result[-2], @result[-1]]
     return self
   end
-
   
   def show
     return @result.collect{|line| line.show}.join("\n")
   end
+
+  #欲しい形に変形しておく  
+  def shape
+    self.n_merge
+    self.adj_merge
+    self.merge3
+  end
+  
 end
 
